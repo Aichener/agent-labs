@@ -1,0 +1,6 @@
+{
+  "doc_a": {"title": "软件开发外包合同（示例 A）", "expect_fail": ["R1", "R2", "R3"]},
+  "doc_b": {"title": "技术服务合同（示例 B）", "expect_fail": ["R4", "R5"]},
+  "doc_c": {"title": "系统运维服务合同（示例 C）", "expect_fail": ["R4", "R6"]},
+  "doc_d": {"title": "软件采购与实施合同（示例 D）", "expect_fail": ["R1", "R3"]}
+}

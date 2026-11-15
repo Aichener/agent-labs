@@ -1,0 +1,20 @@
+{"id": "doc_a-t1", "doc_id": "doc_a", "rules": ["R1", "R2", "R3", "R4", "R5", "R6"], "expect_fail": ["R1", "R2", "R3"], "expect_verdict": "fail"}
+{"id": "doc_a-t2", "doc_id": "doc_a", "rules": ["R1", "R4", "R6"], "expect_fail": ["R1"], "expect_verdict": "fail"}
+{"id": "doc_a-t3", "doc_id": "doc_a", "rules": ["R2", "R3"], "expect_fail": ["R2", "R3"], "expect_verdict": "fail"}
+{"id": "doc_a-t4", "doc_id": "doc_a", "rules": ["R5"], "expect_fail": [], "expect_verdict": "pass"}
+{"id": "doc_a-t5", "doc_id": "doc_a", "rules": ["R1", "R3", "R4", "R5"], "expect_fail": ["R1", "R3"], "expect_verdict": "fail"}
+{"id": "doc_b-t1", "doc_id": "doc_b", "rules": ["R1", "R2", "R3", "R4", "R5", "R6"], "expect_fail": ["R4", "R5"], "expect_verdict": "fail"}
+{"id": "doc_b-t2", "doc_id": "doc_b", "rules": ["R1", "R4", "R6"], "expect_fail": ["R4"], "expect_verdict": "warn"}
+{"id": "doc_b-t3", "doc_id": "doc_b", "rules": ["R2", "R3"], "expect_fail": [], "expect_verdict": "pass"}
+{"id": "doc_b-t4", "doc_id": "doc_b", "rules": ["R5"], "expect_fail": ["R5"], "expect_verdict": "fail"}
+{"id": "doc_b-t5", "doc_id": "doc_b", "rules": ["R1", "R3", "R4", "R5"], "expect_fail": ["R4", "R5"], "expect_verdict": "fail"}
+{"id": "doc_c-t1", "doc_id": "doc_c", "rules": ["R1", "R2", "R3", "R4", "R5", "R6"], "expect_fail": ["R4", "R6"], "expect_verdict": "warn"}
+{"id": "doc_c-t2", "doc_id": "doc_c", "rules": ["R1", "R4", "R6"], "expect_fail": ["R4", "R6"], "expect_verdict": "warn"}
+{"id": "doc_c-t3", "doc_id": "doc_c", "rules": ["R2", "R3"], "expect_fail": [], "expect_verdict": "pass"}
+{"id": "doc_c-t4", "doc_id": "doc_c", "rules": ["R5"], "expect_fail": [], "expect_verdict": "pass"}
+{"id": "doc_c-t5", "doc_id": "doc_c", "rules": ["R1", "R3", "R4", "R5"], "expect_fail": ["R4"], "expect_verdict": "warn"}
+{"id": "doc_d-t1", "doc_id": "doc_d", "rules": ["R1", "R2", "R3", "R4", "R5", "R6"], "expect_fail": ["R1", "R3"], "expect_verdict": "fail"}
+{"id": "doc_d-t2", "doc_id": "doc_d", "rules": ["R1", "R4", "R6"], "expect_fail": ["R1"], "expect_verdict": "fail"}
+{"id": "doc_d-t3", "doc_id": "doc_d", "rules": ["R2", "R3"], "expect_fail": ["R3"], "expect_verdict": "fail"}
+{"id": "doc_d-t4", "doc_id": "doc_d", "rules": ["R5"], "expect_fail": [], "expect_verdict": "pass"}
+{"id": "doc_d-t5", "doc_id": "doc_d", "rules": ["R1", "R3", "R4", "R5"], "expect_fail": ["R1", "R3"], "expect_verdict": "fail"}
