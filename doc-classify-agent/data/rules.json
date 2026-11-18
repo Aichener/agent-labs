@@ -1,0 +1,8 @@
+[
+  {"id": "SR1", "level": "L3", "keywords": ["型号", "联调"], "threshold": 0.5,
+   "desc": "型号的分系统联调工作安排"},
+  {"id": "SR2", "level": "L4", "keywords": ["结论", "评审"], "threshold": 0.45,
+   "desc": "试验结论经评审通过"},
+  {"id": "SR3", "level": "L2", "keywords": ["内部", "员工", "名单"], "threshold": 0.5,
+   "desc": "内部人员信息与名单"}
+]
