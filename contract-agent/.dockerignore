@@ -1,0 +1,14 @@
+﻿# 不需要进镜像的东西：本地日志、缓存、虚拟环境、结果库、git 元数据
+logs/
+__pycache__/
+*.pyc
+.venv/
+.git/
+data/tasks.db
+data/tasks.db-wal
+data/tasks.db-shm
+data/memory.json
+data/review_memory.json
+eval/report*.json
+eval/history.jsonl
+.env

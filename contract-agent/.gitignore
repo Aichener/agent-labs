@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+logs/
+eval/report*.json
+.env
+.venv/
+
+data/tasks.db
+data/tasks.db-wal
+data/tasks.db-shm

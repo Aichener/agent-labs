@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+logs/
+.env
+.venv/
+*/logs/
+*/eval/report*.json
+*/eval/history.jsonl
+*/data/memory.json
+*/data/review_memory.json
+*/data/tasks.db
+*/data/tasks.db-wal
+*/data/tasks.db-shm
