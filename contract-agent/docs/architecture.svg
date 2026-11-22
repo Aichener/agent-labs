@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="1070" viewBox="0 0 1180 1070" role="img">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8c959f"/>
+  </marker>
+</defs>
+<rect width="1180" height="1070" fill="#ffffff"/>
+<text x="40" y="42" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="21" font-weight="700" fill="#1f2328">contract-agent 架构</text>
+<text x="40" y="66" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#57606a">Plan-and-Execute：模型负责规划，执行 / 校验 / 判定在代码里；虚线为回流路径</text>
+<rect x="60" y="96" width="430" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="275.0" y="118" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">请求</text>
+<text x="275.0" y="138" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">doc_id / text / file_b64 + rules</text>
+<rect x="60" y="196" width="430" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="275.0" y="218" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">入参预检（HITL）</text>
+<text x="275.0" y="238" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">文档或规则缺失 → 直接提问，不调模型</text>
+<rect x="60" y="306" width="430" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="275.0" y="328" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">Planner（LLM）</text>
+<text x="275.0" y="348" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">输出 JSON 计划：tool / args / why</text>
+<rect x="60" y="416" width="430" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="275.0" y="438" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">Plan Validator</text>
+<text x="275.0" y="458" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">工具名 · 参数 schema · 规则范围 · 末步 finalize</text>
+<rect x="60" y="526" width="430" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="275.0" y="548" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">Executor</text>
+<text x="275.0" y="568" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">逐步执行 · 写 trace · 累计 tool_calls</text>
+<rect x="60" y="636" width="430" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="275.0" y="658" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">Tool Registry（5 个工具）</text>
+<text x="275.0" y="678" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">JSON Schema · 幂等 · ToolError 分类</text>
+<rect x="60" y="746" width="430" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="275.0" y="768" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">Observation + Guardrails</text>
+<text x="275.0" y="788" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">步数 12 · 工具 10 · 墙钟 30s · 重复调用</text>
+<rect x="60" y="866" width="430" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="275.0" y="888" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">Aggregator（确定性）</text>
+<text x="275.0" y="908" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">按 severity 合成 pass / warn / fail</text>
+<rect x="60" y="976" width="430" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="275.0" y="998" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">落库与日志</text>
+<text x="275.0" y="1018" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">SQLite 幂等 · JSONL 证据脱敏</text>
+<rect x="700" y="196" width="400" height="64" rx="9" fill="#fff8c5" stroke="#bf8700" stroke-width="1.3"/>
+<text x="900.0" y="218" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">need_clarification</text>
+<text x="900.0" y="238" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">返回 questions，零工具调用</text>
+<rect x="700" y="416" width="400" height="64" rx="9" fill="#fff8c5" stroke="#bf8700" stroke-width="1.3"/>
+<text x="900.0" y="438" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">带错误让模型重出一次</text>
+<text x="900.0" y="458" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">格式问题告诉模型，不直接兜底</text>
+<rect x="700" y="526" width="400" height="64" rx="9" fill="#fff8c5" stroke="#bf8700" stroke-width="1.3"/>
+<text x="900.0" y="548" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">Fallback Plan</text>
+<text x="900.0" y="568" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">固定流程：extract → check×N → finalize</text>
+<rect x="700" y="636" width="400" height="64" rx="9" fill="#fff8c5" stroke="#bf8700" stroke-width="1.3"/>
+<text x="900.0" y="658" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">参数修复后重试一次</text>
+<text x="900.0" y="678" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">去掉多余字段再调，仍失败记入 failures</text>
+<rect x="700" y="746" width="400" height="64" rx="9" fill="#fbefff" stroke="#8250df" stroke-width="1.3"/>
+<text x="900.0" y="768" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">停止并标记 stopped_by</text>
+<text x="900.0" y="788" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">结果仍聚合，标记为不完整</text>
+<rect x="700" y="866" width="400" height="64" rx="9" fill="#fbefff" stroke="#8250df" stroke-width="1.3"/>
+<text x="900.0" y="888" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">Reflection（仅一次）</text>
+<text x="900.0" y="908" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">带 failures 重出计划 · 清空重复记录</text>
+<polyline points="275.0,160 275.0,178.0 275.0,178.0 275.0,196" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="490,228.0 595.0,228.0 595.0,228.0 700,228.0" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="504" y="219.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="start">缺信息</text>
+<polyline points="275.0,260 275.0,283.0 275.0,283.0 275.0,306" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="285.0" y="277.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="middle">通过</text>
+<polyline points="275.0,370 275.0,393.0 275.0,393.0 275.0,416" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="490,448.0 595.0,448.0 595.0,448.0 700,448.0" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="504" y="439.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="start">不合法</text>
+<polyline points="900.0,480 900.0,503.0 900.0,503.0 900.0,526" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="910.0" y="497.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="middle">仍不合法</text>
+<polyline points="700,558.0 595.0,558.0 595.0,558.0 490,558.0" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="595.0" y="550.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="middle">兜底执行</text>
+<polyline points="275.0,480 275.0,503.0 275.0,503.0 275.0,526" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="285.0" y="497.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="middle">合法</text>
+<polyline points="275.0,590 275.0,613.0 275.0,613.0 275.0,636" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="285.0" y="607.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="middle">调用</text>
+<polyline points="490,668.0 595.0,668.0 595.0,668.0 700,668.0" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="504" y="659.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="start">失败</text>
+<polyline points="275.0,700 275.0,723.0 275.0,723.0 275.0,746" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="285.0" y="717.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="middle">成功</text>
+<polyline points="490,778.0 595.0,778.0 595.0,778.0 700,778.0" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="504" y="769.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="start">触发</text>
+<polyline points="275.0,810 275.0,838.0 275.0,838.0 275.0,866" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="285.0" y="832.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="middle">继续</text>
+<polyline points="275.0,930 275.0,953.0 275.0,953.0 275.0,976" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="1100,668.0 1145,668.0 1145,898.0 1100,898.0" fill="none" stroke="#8c959f" stroke-width="1.4" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="1128" y="783.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="end">连续两次失败</text>
+<polyline points="700,898.0 660,898.0 660,558.0 490,558.0" fill="none" stroke="#8c959f" stroke-width="1.4" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="652" y="728.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="end">重规划后回到执行</text>
+</svg>

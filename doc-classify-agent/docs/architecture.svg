@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1210" height="1150" viewBox="0 0 1210 1150" role="img">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#8c959f"/>
+  </marker>
+</defs>
+<rect width="1210" height="1150" fill="#ffffff"/>
+<text x="40" y="42" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="21" font-weight="700" fill="#1f2328">doc-classify-agent 架构</text>
+<text x="40" y="66" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="13" fill="#57606a">三路取证 → 晚期融合 → 弃权与升级；虚线为回流路径（固定 DAG，不是 LLM Agent）</text>
+<rect x="60" y="96" width="300" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="210.0" y="118" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">文档</text>
+<text x="210.0" y="138" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">txt / md / docx / pdf</text>
+<rect x="60" y="196" width="300" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="210.0" y="218" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">解析（Perception）</text>
+<text x="210.0" y="238" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">取文本 → 分段 → 分句</text>
+<rect x="60" y="306" width="260" height="84" rx="9" fill="#ddf4ff" stroke="#0969da" stroke-width="1.3"/>
+<text x="190.0" y="328" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">通道①：敏感词</text>
+<text x="190.0" y="348" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">词库精确匹配</text>
+<text x="190.0" y="368" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">证据：词 + 等级</text>
+<rect x="370" y="306" width="260" height="84" rx="9" fill="#ddf4ff" stroke="#0969da" stroke-width="1.3"/>
+<text x="500.0" y="328" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">通道②：敏感句</text>
+<text x="500.0" y="348" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">句库精确匹配</text>
+<text x="500.0" y="368" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">证据：整句</text>
+<rect x="680" y="306" width="300" height="84" rx="9" fill="#ddf4ff" stroke="#0969da" stroke-width="1.3"/>
+<text x="830.0" y="328" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">通道③：语义规则</text>
+<text x="830.0" y="348" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">关键词召回 + 向量召回</text>
+<text x="830.0" y="368" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">RRF → 置信分 ≥ 阈值</text>
+<rect x="370" y="500" width="300" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="520.0" y="522" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">晚期融合</text>
+<text x="520.0" y="542" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">按证据类型加权 0.45 / 0.35 / 0.20</text>
+<rect x="370" y="625" width="300" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="520.0" y="647" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">证据够吗？</text>
+<text x="520.0" y="667" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">仅语义命中 / 置信 &lt; 0.45</text>
+<rect x="370" y="760" width="300" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="520.0" y="782" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">需人工复核？</text>
+<text x="520.0" y="802" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">通道不一致 / 高等级 / 低置信</text>
+<rect x="370" y="890" width="300" height="64" rx="9" fill="#ffffff" stroke="#d0d7de" stroke-width="1.3"/>
+<text x="520.0" y="912" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">定档 L1–L4</text>
+<text x="520.0" y="932" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">确定性判据 · 可单测</text>
+<rect x="770" y="625" width="320" height="84" rx="9" fill="#fbefff" stroke="#8250df" stroke-width="1.3"/>
+<text x="930.0" y="647" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">反思：二次判定</text>
+<text x="930.0" y="667" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">放宽阈值 0.85 重跑</text>
+<text x="930.0" y="687" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">结果标记 retried</text>
+<rect x="770" y="760" width="320" height="84" rx="9" fill="#fff8c5" stroke="#bf8700" stroke-width="1.3"/>
+<text x="930.0" y="782" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">追问清单 + 优先级</text>
+<text x="930.0" y="802" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">具体问题，不是只标「需复核」</text>
+<text x="930.0" y="822" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">P0 / P1 / P2</text>
+<rect x="770" y="890" width="320" height="64" rx="9" fill="#fff8c5" stroke="#bf8700" stroke-width="1.3"/>
+<text x="930.0" y="912" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">人工复核</text>
+<text x="930.0" y="932" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">定档或改判（Human-in-the-loop）</text>
+<rect x="770" y="1000" width="320" height="84" rx="9" fill="#fbefff" stroke="#8250df" stroke-width="1.3"/>
+<text x="930.0" y="1022" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="14.5" font-weight="600" fill="#1f2328">记忆</text>
+<text x="930.0" y="1042" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">正文 sha256 → 人工结论</text>
+<text x="930.0" y="1062" text-anchor="middle" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="12" fill="#57606a">下次直接复用</text>
+<polyline points="210.0,160 210.0,178.0 210.0,178.0 210.0,196" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="210.0,260 210.0,286 190.0,286 190.0,306" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="224.0" y="280" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="middle">并行</text>
+<polyline points="210.0,260 210.0,286 500.0,286 500.0,306" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="210.0,260 210.0,286 830.0,286 830.0,306" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="190.0,390 190.0,470 520.0,470 520.0,500" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="500.0,390 500.0,470" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="830.0,390 830.0,470 520.0,470" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="520.0,564 520.0,594.5 520.0,594.5 520.0,625" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="670,657.0 720.0,657.0 720.0,667.0 770,667.0" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="684" y="648.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="start">弱</text>
+<polyline points="770,667.0 716,667.0 716,532.0 670,532.0" fill="none" stroke="#8c959f" stroke-width="1.4" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="724" y="599.5" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="start">重算</text>
+<polyline points="520.0,689 520.0,724.5 520.0,724.5 520.0,760" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="530.0" y="718.5" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="middle">够</text>
+<polyline points="670,792.0 720.0,792.0 720.0,802.0 770,802.0" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="684" y="783.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="start">是</text>
+<polyline points="930.0,844 930.0,867.0 930.0,867.0 930.0,890" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="930.0,954 930.0,977.0 930.0,977.0 930.0,1000" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<polyline points="1090,1042.0 1150,1042.0 1150,554.0 670,554.0" fill="none" stroke="#8c959f" stroke-width="1.4" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="1116" y="584.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="end">复核结论回流</text>
+<polyline points="520.0,824 520.0,857.0 520.0,857.0 520.0,890" fill="none" stroke="#8c959f" stroke-width="1.4" marker-end="url(#arrow)"/>
+<text x="530.0" y="851.0" font-family="'Noto Sans CJK SC','Microsoft YaHei','PingFang SC',sans-serif" font-size="11" fill="#57606a" text-anchor="middle">否</text>
+</svg>
