@@ -75,13 +75,13 @@ docker compose up -d --build
 
 环境变量两个服务一样，只有端口不同：
 
-| 变量 | 作用 | 默认 |
-|---|---|---|
-| `AGENT_API_KEYS` | key:租户，逗号分隔 | 无（缺省用仅本机的 dev-key） |
-| `AGENT_DB` | SQLite 路径 | `data/tasks.db`（镜像里是 `/app/state/tasks.db`） |
-| `AGENT_TIMEOUT` | 单请求超时秒数 | 30 |
-| `AGENT_HOST` / `AGENT_PORT` | 监听地址 | `127.0.0.1` / 8080、8081 |
-| `LLM_BASE_URL` / `LLM_MODEL` | 合同核查的模型端点，不填走 Mock | Ollama 默认值 |
+| 变量                           | 作用                 | 默认                                          |
+| ---------------------------- | ------------------ | ------------------------------------------- |
+| `AGENT_API_KEYS`             | key:租户，逗号分隔        | 无（缺省用仅本机的 dev-key）                          |
+| `AGENT_DB`                   | SQLite 路径          | `data/tasks.db`（镜像里是 `/app/state/tasks.db`） |
+| `AGENT_TIMEOUT`              | 单请求超时秒数            | 30                                          |
+| `AGENT_HOST` / `AGENT_PORT`  | 监听地址               | `127.0.0.1` / 8080、8081                     |
+| `LLM_BASE_URL` / `LLM_MODEL` | 合同核查的模型端点，不填走 Mock | Ollama 默认值                                  |
 
 反代看 `deploy/nginx.conf`：TLS 终止、请求体 10m（服务端上限 8m，留点余量）、读写超时 60s（让 504 由服务自己回），`/healthz` 由 nginx 直接返回 200，不打到业务上。
 
@@ -94,14 +94,14 @@ docker run --rm -v deploy_contract-state:/state -v "$PWD:/backup" alpine \
 
 如果不想用 Docker，两个服务都是纯 Python，`python -m agent.api` 起进程，配 systemd 或 supervisor 守着即可，注意把 `AGENT_DB` 指到一个可写的绝对路径。
 
-有几条限制得说在前面，免得按「随便扩」的思路部署：
+有几条限制需要注意：
 
 - 结果库是 SQLite，单写者。每个服务只能跑一个副本，`replicas` 不能加，要横向扩得先把 store 换成 Postgres。
 - 服务内是 4 线程池，uvicorn 单进程，没有 CPU / 内存配额。一份 200 页文档进来会占满一个 worker，并发高了要自己排队或前置限流。别开 `--workers`，SQLite 会打架。
 - 服务本身不带 TLS 和访问频率限制，这两件事交给反代。
 - 超时返回 504 只是让请求先结束，后台线程不会被真正取消。
 
-这些配置只做过 YAML 语法检查，没有在 CI 里真实构建过（本机也没装 Docker），第一次上服务器时请先 `docker compose config` 看一眼解析结果。
+第一次上服务器时请先 `docker compose config` 看一眼解析结果。
 
 ## 推送前检查
 
