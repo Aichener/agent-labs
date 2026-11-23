@@ -55,11 +55,11 @@ curl -X POST http://127.0.0.1:8080/v1/review \
   -d "{\"doc_id\":\"doc_a\"}"
 ```
 
-有三件事是刻意这么做的：
+注意：
 
 结果按 key 对应的租户存，拿别的租户的 `request_id` 去取会被挡回来（403）。同样的正文和规则再提交一次，直接返回上次结果，`replayed: true`，`request_id` 还是原来那个，不会再跑一遍模型。结果落在 SQLite 里，进程杀掉重启，按 id 还能取回。
 
-也有几件没做完，写在前面免得误会：超时回 504，但后台线程不会被真正取消，只是先让请求结束；上传的正文只在内存里过一下，请求结束就释放。上传支持 txt、md、docx、pdf，后两种要装依赖（pip install -r requirements.txt：python-docx、PyMuPDF）。pdf 用 PyMuPDF 取文本层，中文能正常提；扫描件没有文本层会返回 422，不硬判。
+有几件没做完：超时回 504，但后台线程不会被真正取消，只是先让请求结束；上传的正文只在内存里过一下，请求结束就释放。上传支持 txt、md、docx、pdf，后两种要装依赖（pip install -r requirements.txt：python-docx、PyMuPDF）。pdf 用 PyMuPDF 取文本层，中文能正常提；扫描件没有文本层会返回 422，不硬判。
 
 ## 部署
 
