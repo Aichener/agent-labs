@@ -48,10 +48,12 @@ def main() -> int:
         line = f"{doc_id:<6}{truth[doc_id]['level']:<6}"
         for v in VARIANTS:
             got = by_doc[doc_id].get(v, "-")
-            mark = "" if got == truth[doc_id]["level"] else "✗"
+            # 用 ASCII 标记：GBK 控制台下 ✗ 编不出来，整个表会崩
+            mark = "" if got == truth[doc_id]["level"] else "!"
             line += f"{got + mark:<16}"
         print(line)
     print("-" * 72)
+    print("! 表示判错")
 
     full = results[-1]
     best_single = max(results[:3], key=lambda r: r["accuracy"])
